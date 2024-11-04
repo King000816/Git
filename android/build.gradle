@@ -1,18 +1,20 @@
 allprojects {
     repositories {
-        google()
-        mavenCentral()
+        google() // Google Maven 저장소
+        mavenCentral() // Maven Central 저장소
     }
 }
 
+// 빌드 디렉토리 설정
 rootProject.buildDir = "../build"
+
+// 서브 프로젝트의 빌드 디렉토리 설정
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
-}
-subprojects {
-    project.evaluationDependsOn(":app")
+    project.evaluationDependsOn(":app") // :app 모듈에 의존
 }
 
+// 클린 작업 등록
 tasks.register("clean", Delete) {
-    delete rootProject.buildDir
+    delete rootProject.buildDir // rootProject의 빌드 디렉토리 삭제
 }

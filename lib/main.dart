@@ -1,173 +1,49 @@
 import 'package:flutter/material.dart';
-import 'main_P.dart'; // ParentMainPage를 포함한 파일
+import 'map.dart'; // MapScreen을 import합니다.
+import 'plgeon_user_details.dart'; // PlgeonUserDetails 클래스를 import합니다.
 
-void main() {
-  runApp(const MyApp());
-}
+class MainPage extends StatefulWidget {
+  final PlgeonUserDetails userDetails;
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MainPage({Key? key, required this.userDetails}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '어린이집 앱',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const HomePage(),
-    );
-  }
+  _MainPageState createState() => _MainPageState();
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  void _navigateToTeacherMode(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const TeacherLoginPage()),
-    );
-  }
-
-  void _navigateToParentMode(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const ParentLoginPage()),
-    );
-  }
-
-  void _navigateToMainP(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const ParentMainPage()), // main_P.dart의 ParentMainPage로 이동
-    );
-  }
-
+class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('어린이집 앱'),
+        title: const Text('학부모 페이지'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, // 중앙 정렬
-          children: [
-            const Text(
-              '사용자 모드 선택',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 40),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center, // 중앙 정렬
-              children: [
-                ElevatedButton(
-                  onPressed: () => _navigateToTeacherMode(context),
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-                    backgroundColor: Colors.blue, // 버튼 색상
-                    textStyle: const TextStyle(fontSize: 20),
-                  ),
-                  child: const Text('선생님 모드'),
-                ),
-                const SizedBox(width: 20), // 버튼 간격
-                ElevatedButton(
-                  onPressed: () => _navigateToParentMode(context),
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-                    backgroundColor: Colors.green, // 버튼 색상
-                    textStyle: const TextStyle(fontSize: 20),
-                  ),
-                  child: const Text('학부모 모드'),
-                ),
-              ],
-            ),
-            const SizedBox(height: 40),
-            ElevatedButton(
-              onPressed: () => _navigateToMainP(context), // 추가된 버튼의 클릭 이벤트
-              child: const Text('메인 페이지'), // 버튼 이름
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class TeacherLoginPage extends StatelessWidget {
-  const TeacherLoginPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('선생님 로그인'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, // 중앙 정렬
-          children: [
-            TextField(
-              decoration: const InputDecoration(labelText: '이메일'),
-            ),
-            const SizedBox(height: 20),
-            TextField(
-              decoration: const InputDecoration(labelText: '비밀번호'),
-              obscureText: true,
-            ),
-            const SizedBox(height: 40),
-            ElevatedButton(
-              onPressed: () {
-                // 로그인 로직 추가
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('선생님 로그인 시도')),
-                );
-              },
-              child: const Text('로그인'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class ParentLoginPage extends StatelessWidget {
-  const ParentLoginPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('학부모 로그인'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, // 중앙 정렬
-          children: [
-            TextField(
-              decoration: const InputDecoration(labelText: '이메일'),
-            ),
-            const SizedBox(height: 20),
-            TextField(
-              decoration: const InputDecoration(labelText: '비밀번호'),
-              obscureText: true,
-            ),
-            const SizedBox(height: 40),
-            ElevatedButton(
-              onPressed: () {
-                // 로그인 로직 추가
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('학부모 로그인 시도')),
-                );
-              },
-              child: const Text('로그인'),
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              // 캘린더 제거 후 다른 내용 추가
+              const Text(
+                '여기에서 아이의 위치를 확인할 수 있습니다.',
+                style: TextStyle(fontSize: 18),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              // 아이 위치 버튼 추가
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MapScreen(), // 아이 위치 찾기 화면으로 이동
+                    ),
+                  );
+                },
+                child: const Text('아이 위치 보기'),
+              ),
+            ],
+          ),
         ),
       ),
     );

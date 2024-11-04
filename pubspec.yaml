@@ -12,30 +12,27 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.8
 
-  # Firebase dependencies
-  firebase_core: ^2.15.0
-  firebase_auth: ^4.16.0  # 버전 변경
+  # Firebase dependencies (안정화된 버전)
+  firebase_core: ^2.27.0
+  firebase_auth: ^4.17.8
+  cloud_firestore: ^4.17.5  # Firestore 패키지 추가
 
-  # Calendar dependency
+  # 기타 패키지
   flutter_calendar_carousel: ^2.3.1
-
-  # HTTP 요청을 위한 패키지
   http: ^1.2.2
-
-  # 날짜 포맷팅을 위한 패키지
   intl: ^0.19.0
-
-  # Google Maps 패키지
-  google_maps_flutter: ^2.9.0  # 최신 버전으로 변경
-
-  # Geolocator 패키지
-  geolocator: ^9.0.2  # 최신 버전으로 변경
-
-  # Permission Handler 패키지
-  permission_handler: ^11.3.1  # 최신 버전으로 유지
+  google_maps_flutter: ^2.9.0
+  geolocator: ^9.0.2
+  permission_handler: ^11.3.1
+  shared_preferences: ^2.0.0  # SharedPreferences 패키지 추가
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
 
+flutter:
+  assets:
+    - assets/img/back.png  # 뒤로가기 버튼 이미지 경로
+    - assets/img/some_image.png  # 추가할 이미지 경로 예시
+    - assets/fonts/my_font.ttf  # 추가할 폰트 경로 예시
